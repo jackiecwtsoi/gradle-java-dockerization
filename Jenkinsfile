@@ -18,7 +18,7 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 echo 'Docker Image Build in progress...'
-                sh "{DOCKER_CMD} build -t jackiecwtsoi/simple-java-image ."
+                sh "docker build -t jackiecwtsoi/simple-java-image ."
             }
         }
     }
