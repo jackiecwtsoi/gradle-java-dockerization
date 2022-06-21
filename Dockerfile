@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
 FROM gradle:7.1.0-jdk16 AS build-image
+EXPOSE 8080
 
 COPY . /app
 WORKDIR /app
