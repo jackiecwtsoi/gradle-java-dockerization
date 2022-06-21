@@ -10,7 +10,7 @@ pipeline {
         stage('Build Gradle') {
             steps {
                 echo 'Building Gradle...'
-                build quietPeriod: 3, job: 'gradle-java-docker'
+                sh './gradlew build'
             }
         }
         stage('Build Docker Image') {
