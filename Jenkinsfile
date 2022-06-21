@@ -21,10 +21,12 @@ pipeline {
             }
         }
         stage('Publish Docker Image') {
-            echo 'Pushing image to Docker Hub...'
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-                app.push("${env.BUILD_NUMBER}")
-                app.push('latest')
+            steps {
+                echo 'Pushing image to Docker Hub...'
+                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push('latest')
+                }
             }
         }
     }
