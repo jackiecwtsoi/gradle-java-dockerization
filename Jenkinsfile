@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         DOCKER_HOME = tool name: 'docker-1', type: 'dockerTool'
-        DOCKER_CMD = "${DOCKER_HOME}/bin/docker"
+        DOCKER_CMD = "/usr/local/bin/docker"
     }
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 echo 'Docker Image Build in progress...'
-                sh "docker build -t jackiecwtsoi/simple-java-image ."
+                sh "${DOCKER_CMD} build -t jackiecwtsoi/simple-java-image ."
             }
         }
     }
