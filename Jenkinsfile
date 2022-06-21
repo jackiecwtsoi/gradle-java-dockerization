@@ -1,11 +1,8 @@
 pipeline {
-    agent {
-        dockerfile true
-    }
+    agent any
 
     environment {
-        DOCKER_HOME = tool name: 'docker-1', type: 'dockerTool'
-        DOCKER_CMD = "/usr/local/bin/docker"
+        DOCKER_PATH = "/usr/local/bin/docker"
     }
 
     stages {
@@ -18,7 +15,8 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 echo 'Docker Image Build in progress...'
-                sh "/usr/local/bin/docker build -t jackiecwtsoi/simple-java-image ."
+                sh "${DOCKER_PATH} images"
+                sh "${DOCKER_PATH} build -t simple-java-image ."
             }
         }
     }
