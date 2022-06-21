@@ -6,17 +6,25 @@ pipeline {
     }
 
     stages {
-        stage('Gradle Build') {
+        stage('Build Gradle') {
             steps {
-                echo 'Gradle Build in progress...'
+                echo 'Building Gradle...'
                 build quietPeriod: 3, job: 'gradle-java-docker'
             }
         }
-        stage('Docker Image Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Docker Image Build in progress...'
-                sh "${DOCKER_PATH} images"
+                echo 'Building Docker Image...'
                 sh "${DOCKER_PATH} build -t simple-java-image ."
+                echo 'Listing all created images: '
+                sh "${DOCKER_PATH} images"
+            }
+        }
+        stage('Publish Docker Image') {
+            echo 'Pushing image to Docker Hub...'
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push('latest')
             }
         }
     }
