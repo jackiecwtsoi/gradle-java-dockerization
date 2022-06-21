@@ -26,7 +26,7 @@ pipeline {
                 echo 'Logging into Docker Hub account...'
 //                 sh "echo ${DOCKER_HUB_CREDENTIALS} | $DOCKER_PATH login -u ${DOCKER_HUB_CREDENTIALS} --password-stdin"
                 echo 'Pushing image to Docker Hub...'
-                sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
+                sh '$DOCKER_PATH push simple-java-image:latest'
             }
         }
     }
