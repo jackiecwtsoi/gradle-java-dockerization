@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
+        DOCKER_HUB_CREDENTIALS=credentials('docker-hub')
     }
 
     stages {
@@ -22,11 +23,15 @@ pipeline {
         }
         stage('Publish Docker Image') {
             steps {
+                echo 'Logging into Docker Hub account...'
+                sh "echo ${DOCKER_HUB_CREDENTIALS} | docker login -u ${DOCKER_HUB_CREDENTIALS} --password-stdin"
                 echo 'Pushing image to Docker Hub...'
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push('latest')
-                }
+                sh 'docker push jackiecwtsoi/simple-java-image:latest'
+            }
+        }
+        post {
+            always {
+                sh 'docker logout'
             }
         }
     }
