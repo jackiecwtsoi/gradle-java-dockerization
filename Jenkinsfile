@@ -1,21 +1,24 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile true
+    }
+
+//     environment {
+//         DOCKER_HOME = tool name: 'docker-1', type: 'dockerTool'
+//         DOCKER_CMD = "${DOCKER_HOME}/bin/docker"
+//     }
 
     stages {
-        stage('Hello') {
+        stage('Gradle Build') {
             steps {
-                echo 'Hello World! This is a simple Jenkins pipeline job.'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building'
+                echo 'Gradle Build in progress...'
                 build quietPeriod: 3, job: 'gradle-java-docker'
             }
         }
-        stage('Dockerize') {
+        stage('Docker Image Build') {
             steps {
-                echo 'Dockerizing'
+                echo 'Docker Image Build in progress...'
+                sh "docker build -t jackiecwtsoi/simple-java-image ."
             }
         }
     }
