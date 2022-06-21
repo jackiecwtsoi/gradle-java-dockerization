@@ -24,15 +24,15 @@ pipeline {
         stage('Publish Docker Image') {
             steps {
                 echo 'Logging into Docker Hub account...'
-                sh "echo ${DOCKER_HUB_CREDENTIALS} | docker login -u ${DOCKER_HUB_CREDENTIALS} --password-stdin"
+                sh "echo ${DOCKER_HUB_CREDENTIALS} | $DOCKER_PATH login -u ${DOCKER_HUB_CREDENTIALS} --password-stdin"
                 echo 'Pushing image to Docker Hub...'
-                sh 'docker push jackiecwtsoi/simple-java-image:latest'
+                sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
             }
         }
     }
     post {
         always {
-            sh 'docker logout'
+            sh '$DOCKER_PATH logout'
         }
     }
 }
