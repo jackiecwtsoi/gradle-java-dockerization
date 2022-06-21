@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
         DOCKER_HUB_CREDENTIALS=credentials('docker-hub')
-        DOCKER_PWD='Rchk1457*'
+        DOCKER_PWD = Rchk1457*
     }
 
     stages {
