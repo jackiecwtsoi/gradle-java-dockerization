@@ -29,10 +29,10 @@ pipeline {
                 sh 'docker push jackiecwtsoi/simple-java-image:latest'
             }
         }
-        post {
-            always {
-                sh 'docker logout'
-            }
+    }
+    post {
+        always {
+            sh 'docker logout'
         }
     }
 }
