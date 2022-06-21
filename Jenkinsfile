@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
         DOCKER_HUB_CREDENTIALS=credentials('docker-hub')
-        DOCKER_HUB_PWD='Rchk1457*'
     }
 
     stages {
@@ -25,7 +24,7 @@ pipeline {
         stage('Publish Docker Image') {
             steps {
                 echo 'Logging into Docker Hub account...'
-                sh '$DOCKER_PATH login -u ${DOCKER_HUB_CREDENTIALS} -p $DOCKER_HUB_PWD docker.io'
+                sh '$DOCKER_PATH login -u ${DOCKER_HUB_CREDENTIALS} --password-stdin docker.io'
                 echo 'Pushing image to Docker Hub...'
                 sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
             }
