@@ -12,7 +12,6 @@ EXPOSE 8080
 
 WORKDIR /app
 
-
 COPY build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
