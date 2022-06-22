@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image...'
-                sh "${DOCKER_PATH} build -t simple-java-image ."
+                sh "${DOCKER_PATH} build -t jackiecwtsoi/simple-java-image ."
                 echo 'Listing all created images: '
                 sh "${DOCKER_PATH} images"
             }
@@ -30,7 +30,7 @@ pipeline {
         stage('Publish Docker Image') {
             steps {
                 echo 'Publishing Docker Image onto Docker Hub...'
-                sh '$DOCKER_PATH push simple-java-image:latest'
+                sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
             }
         }
         stage('Remove Unused Docker Image') {
