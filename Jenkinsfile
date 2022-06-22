@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
         DOCKER_HUB_CREDENTIALS=credentials('docker-hub')
-        DOCKER_PWD = "Rchk1457*"
     }
 
     stages {
@@ -25,10 +24,16 @@ pipeline {
                 sh "${DOCKER_PATH} images"
             }
         }
+        stage('Log In to Docker Hub') {
+            steps {
+                echo 'Logging in to Docker Hub...'
+                sh '$DOCKER_PATH login -u $DOCKER_HUB_CREDENTIALS --password-stdin'
+            }
+        }
         stage('Publish Docker Image') {
             steps {
                 echo 'Publishing Docker Image onto Docker Hub...'
-
+                sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
             }
         }
         stage('Remove Unused Docker Image') {
