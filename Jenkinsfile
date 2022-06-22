@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile true
+    }
 
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
@@ -16,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image...'
-                sh "${DOCKER_PATH} build -t jackiecwtsoi/simple-java-image /Users/jackietsoi/.jenkins/workspace/simple-pipeline/."
+                sh "${DOCKER_PATH} build -t jackiecwtsoi/simple-java-image ."
                 echo 'Listing all created images: '
                 sh "${DOCKER_PATH} images"
             }
