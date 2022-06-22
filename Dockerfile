@@ -7,13 +7,13 @@
 #
 #RUN gradle --no-daemon build
 
-FROM openjdk:16-alpine3.13
+FROM openjdk:16-alpine3.13 as build-image
 #EXPOSE 8080
 
 WORKDIR /app
 COPY . .
-COPY /Users/jackietsoi/.jenkins/workspace/simple-pipeline/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
+COPY --from=build-image build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["ls"]
