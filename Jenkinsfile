@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     environment {
+        imageName = 'jackiecwtsoi/simple-java-image'
+        dockerImage = ''
         DOCKER_PATH = "/usr/local/bin/docker"
         DOCKER_HUB_CREDENTIALS=credentials('docker-hub')
-        DOCKER_PWD = Rchk1457*
+        DOCKER_PWD = "Rchk1457*"
     }
 
     stages {
@@ -17,17 +19,22 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image...'
-                sh "${DOCKER_PATH} build -t simple-java-image ."
+//                 sh "${DOCKER_PATH} build -t simple-java-image ."
+                script {
+                    dockerImage = "${DOCKER_PATH}".build imageName
+                }
                 echo 'Listing all created images: '
                 sh "${DOCKER_PATH} images"
             }
         }
         stage('Publish Docker Image') {
             steps {
-                echo 'Logging into Docker Hub account...'
-                sh '$DOCKER_PATH login -u ${DOCKER_HUB_CREDENTIALS} -p $DOCKER_PWD docker.io'
-                echo 'Pushing image to Docker Hub...'
-                sh '$DOCKER_PATH push jackiecwtsoi/simple-java-image:latest'
+                echo 'Publishing Docker Image onto Docker Hub...'
+                script {
+                    "${DOCKER_PATH}".withRegistry('', 'docker-hub') {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
