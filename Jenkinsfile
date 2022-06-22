@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        dockerfile true
-    }
+    agent any
 
     environment {
         DOCKER_PATH = "/usr/local/bin/docker"
@@ -11,8 +9,9 @@ pipeline {
     stages {
         stage('Build Gradle') {
             steps {
-                echo 'Building Gradle...'
-                build quietPeriod: 3, job: 'gradle-java-docker'
+//                 echo 'Building Gradle...'
+//                 build quietPeriod: 3, job: 'gradle-java-docker'
+                sh './gradlew --no-daemon build'
             }
         }
         stage('Build Docker Image') {
