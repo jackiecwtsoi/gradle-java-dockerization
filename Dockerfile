@@ -12,7 +12,7 @@ EXPOSE 8080
 
 WORKDIR /app
 COPY . .
-COPY ~/.jenkins/workspace/simple-pipeline/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
+COPY /Users/jackietsoi/.jenkins/workspace/simple-pipeline/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
