@@ -34,13 +34,14 @@ pipeline {
         stage('Remove Unused Docker Image') {
             steps {
                 echo 'Removing unused Docker Image...'
-                sh 'docker rmi simple-java-image'
+                sh '$DOCKER_PATH rmi simple-java-image'
+                sh '$DOCKER_PATH images'
             }
         }
     }
-    post {
-        always {
-            sh '$DOCKER_PATH logout'
-        }
-    }
+//     post {
+//         always {
+//             sh '$DOCKER_PATH logout'
+//         }
+//     }
 }
