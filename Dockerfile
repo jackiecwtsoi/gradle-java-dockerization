@@ -13,8 +13,8 @@ EXPOSE 8080
 WORKDIR /app
 
 COPY . .
-ADD build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
+COPY gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
-ENTRYPOINT ["ls", "-a"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
