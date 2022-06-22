@@ -8,12 +8,12 @@
 #RUN gradle --no-daemon build
 
 FROM openjdk:16-alpine3.13
-#EXPOSE 8080
+EXPOSE 8080
 
 WORKDIR /app
 
 COPY . .
-#COPY  app.jar
+ADD http://localhost:8080/job/gradle-java-docker/lastSuccessfulBuild/artifact/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
