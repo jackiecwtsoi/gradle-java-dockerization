@@ -8,7 +8,7 @@
 #RUN gradle --no-daemon build
 
 FROM openjdk:16-alpine3.13
-EXPOSE 8080
+#EXPOSE 8080
 
 WORKDIR /app
 COPY . .
