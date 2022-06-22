@@ -10,8 +10,9 @@
 FROM openjdk:16-alpine3.13
 EXPOSE 8080
 
-COPY . /app
+WORKDIR /app
+COPY $JENKINS_HOME/workspace/simple-pipeline/. .
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java", "-jar", "./app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar"]
