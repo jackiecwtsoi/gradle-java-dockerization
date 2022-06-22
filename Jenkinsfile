@@ -16,7 +16,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image...'
-                sh 'pwd'
+                sh 'cd build/libs'
+                sh 'ls'
                 sh "${DOCKER_PATH} build -t jackiecwtsoi/simple-java-image ."
                 echo 'Listing all created images: '
                 sh "${DOCKER_PATH} images"

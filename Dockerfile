@@ -11,7 +11,7 @@ FROM openjdk:16-alpine3.13
 EXPOSE 8080
 
 WORKDIR /app
-COPY .jenkins/workspace/simple-pipeline/. .
+COPY . .
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
