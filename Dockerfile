@@ -15,4 +15,4 @@ COPY . .
 
 #COPY --from=build-image app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
 #COPY --from=builder build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java", "-jar", "build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/build/libs/gradle-java-dockerization-1.0-SNAPSHOT.jar"]
